@@ -16,6 +16,12 @@
 
 DEVICE_PATH := device/samsung/j7xelte
 
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += $(DEVICE_PATH)
+
+# Launch Android API level
+PRODUCT_SHIPPING_API_LEVEL := 23
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml \
@@ -38,9 +44,14 @@ PRODUCT_AAPT_PREBUILT_DPI := xhdpi hdpi
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-impl.7870 \
-    android.hardware.bluetooth@1.0-service \
-    libbt-vendor
+    android.hardware.bluetooth.audio@2.0-impl \
+    audio.bluetooth.default
+
+# Radio (broadcastradio)
+PRODUCT_PACKAGES += \
+    android.hardware.broadcastradio@1.0-impl \
+    android.hardware.broadcastradio@1.0 \
+    android.hardware.broadcastradio@1.1
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -48,7 +59,8 @@ PRODUCT_PACKAGES += \
     libnfc_nci_jni \
     NfcNci \
     Tag \
-    com.android.nfc_extras
+    com.android.nfc_extras \
+    android.hardware.nfc@1.2.vendor
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
@@ -57,7 +69,20 @@ DEVICE_PACKAGE_OVERLAYS += \
 # Ramdisk
 PRODUCT_PACKAGES += \
     mobicore.rc \
-    wifi_device.rc
+    init.wifi_device.rc
+
+# Shims
+PRODUCT_PACKAGES += \
+    libbauthtzcommon_shim
+
+# ANT+
+PRODUCT_PACKAGES += \
+    AntHalService \
+    com.dsi.ant.antradio_library \
+    libantradio
+
+PRODUCT_COPY_FILES += \
+    device/samsung/universal7870-common/local-modules/antradio-library/com.dsi.ant.antradio_library.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.dsi.ant.antradio_library.xml
 
 # Wifi
 PRODUCT_PACKAGES += \
