@@ -31,7 +31,9 @@ PRODUCT_COPY_FILES += \
 
 # Custom mixer_paths
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/audio/mixer_paths_rev03.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_rev03.xml
+    $(DEVICE_PATH)/configs/audio/mixer_paths_rev03.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_rev03.xml \
+    $(DEVICE_PATH)/configs/audio/mixer_paths_rev03.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_0.xml \
+    $(DEVICE_PATH)/configs/audio/mixer_paths_rev03.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml
 
 # Bootanimation
 TARGET_SCREEN_HEIGHT := 1280
@@ -75,14 +77,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libbauthtzcommon_shim
 
-# ANT+
-PRODUCT_PACKAGES += \
-    AntHalService \
-    com.dsi.ant.antradio_library \
-    libantradio
-
-PRODUCT_COPY_FILES += \
-    device/samsung/universal7870-common/local-modules/antradio-library/com.dsi.ant.antradio_library.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.dsi.ant.antradio_library.xml
 
 # Wifi
 PRODUCT_PACKAGES += \
@@ -103,6 +97,13 @@ PRODUCT_COPY_FILES += \
 
 # Properties
 -include $(DEVICE_PATH)/vendor_prop.mk
+
+# Audio
+TARGET_DEVICE_HAS_OSS_AUDIO_HAL := true
+TARGET_DEVICE_HAS_PREBUILT_AUDIO_HAL := false
+TARGET_DEVICE_HAS_A6LTE_AUDIO_HAL := false
+TARGET_DEVICE_HAS_M10LTE_AUDIO_HAL := false
+TARGET_DEVICE_HAS_TFA_AMP := false
 
 # Inherit from common
 $(call inherit-product, device/samsung/universal7870-common/device-common.mk)
