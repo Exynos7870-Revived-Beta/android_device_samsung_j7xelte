@@ -26,7 +26,12 @@ PRODUCT_RELEASE_NAME := j7xelte
 
 PRODUCT_PACKAGES += \
     charger \
-    charger_res_images
+    charger_res_images \
+    libresetprop.recovery
+
+# Keymaster version for TWRP crypto manager
+PRODUCT_PROPERTY_OVERRIDES += \
+    keymaster_ver=3.0
 
 # DTBH packer used by build/tasks/dtb.mk
 PRODUCT_HOST_PACKAGES += dtbhtoolExynos
