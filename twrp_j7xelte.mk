@@ -25,8 +25,6 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 PRODUCT_RELEASE_NAME := j7xelte
 
 PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images \
     libresetprop.recovery
 
 # Keymaster version for TWRP crypto manager
